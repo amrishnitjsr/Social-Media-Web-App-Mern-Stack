@@ -1,0 +1,44 @@
+@media (max-width: 600px) {
+  .App {
+    padding: 0.5rem 0.2rem;
+  }
+  .button {
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+  }
+  .blur {
+    width: 12rem;
+    height: 8rem;
+  }
+  /* Example: Make posts and cards stack vertically */
+  .Posts, .PostSide, .FollowersCard, .InfoCard, .RightSide, .ProfilePageLeft, .TrendCard {
+    width: 100%;
+    margin: 0;
+    padding: 0.5rem 0;
+    box-sizing: border-box;
+  }
+  /* Example: Make grid layouts stack */
+  .Home, .Profile {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.5rem;
+  }
+  /* Hide sidebars if needed */
+  .ProfilePageLeft, .RightSide {
+    display: none;
+  }
+  /* Chat box responsive */
+  .ChatBox {
+    width: 100vw;
+    min-width: 0;
+    max-width: 100vw;
+    left: 0;
+    right: 0;
+    border-radius: 0;
+  }
+  /* Inputs and buttons */
+  .infoInput {
+    font-size: 1rem;
+    padding: 0.5rem;
+  }
+}

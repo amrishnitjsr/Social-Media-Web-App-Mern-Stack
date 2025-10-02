@@ -1,0 +1,96 @@
+.Home{
+    position: relative;
+    display: grid;
+    grid-template-columns: 18rem auto 20rem;   
+    gap: 1.5rem;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+    min-height: 100vh;
+    animation: fadeIn 0.6s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Left Side - Profile Section */
+.Home > div:nth-child(1) {
+    animation: slideInLeft 0.7s ease-out;
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Center - Posts Section */
+.Home > div:nth-child(2) {
+    animation: slideInUp 0.7s ease-out;
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Right Side - Trends Section */
+.Home > div:nth-child(3) {
+    animation: slideInRight 0.7s ease-out;
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .Home {
+        grid-template-columns: 16rem auto 18rem;
+        gap: 1rem;
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 992px) {
+    .Home {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        padding: 1rem;
+    }
+    
+    .Home > div:nth-child(1),
+    .Home > div:nth-child(3) {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .Home {
+        padding: 0.5rem;
+        background: #f5f7fa;
+    }
+}

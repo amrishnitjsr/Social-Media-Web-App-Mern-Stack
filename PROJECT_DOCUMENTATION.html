@@ -1,0 +1,1583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Media Web Application - Technical Documentation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #2196f3;
+            --secondary-color: #1976d2;
+            --dark-bg: #0f172a;
+            --darker-bg: #0a0f1a;
+            --card-bg: #1e293b;
+            --text-primary: #e2e8f0;
+            --text-secondary: #94a3b8;
+            --accent-blue: #60a5fa;
+            --accent-purple: #8b5cf6;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --border-color: rgba(59, 130, 246, 0.2);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(160deg, var(--dark-bg) 0%, var(--darker-bg) 100%);
+            color: var(--text-primary);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: 
+                radial-gradient(circle at 25% 75%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 75% 25%, rgba(139, 92, 246, 0.08) 0%, transparent 50%);
+            animation: cosmicFloat 30s ease-in-out infinite;
+            z-index: -1;
+        }
+
+        @keyframes cosmicFloat {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(3%, -3%) rotate(2deg); }
+            66% { transform: translate(-3%, 3%) rotate(-2deg); }
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.95), rgba(15, 23, 42, 0.98));
+            backdrop-filter: blur(20px);
+            border-bottom: 2px solid var(--border-color);
+            padding: 2rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #60a5fa 0%, #818cf8 50%, #a78bfa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+            letter-spacing: -1px;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(30, 41, 59, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem 0;
+            position: sticky;
+            top: 140px;
+            z-index: 999;
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            border: 1px solid transparent;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-blue);
+            background: rgba(59, 130, 246, 0.1);
+            border-color: var(--border-color);
+            transform: translateY(-2px);
+        }
+
+        /* Main Content */
+        main {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem 3rem;
+        }
+
+        section {
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.8));
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #60a5fa 0%, #818cf8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        h3 {
+            font-size: 1.8rem;
+            color: var(--accent-blue);
+            margin: 2rem 0 1rem;
+            font-weight: 600;
+        }
+
+        h4 {
+            font-size: 1.4rem;
+            color: var(--accent-purple);
+            margin: 1.5rem 0 1rem;
+            font-weight: 600;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+
+        /* Lists */
+        ul, ol {
+            margin-left: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-secondary);
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+            padding-left: 0.5rem;
+        }
+
+        /* Feature Cards */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .feature-card {
+            background: rgba(51, 65, 85, 0.5);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+            border-color: var(--accent-blue);
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Code Blocks */
+        pre {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        code {
+            font-family: 'Courier New', Courier, monospace;
+            color: #4ade80;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background: rgba(51, 65, 85, 0.3);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        thead {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.3), rgba(99, 102, 241, 0.3));
+        }
+
+        th {
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            color: var(--text-primary);
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid rgba(59, 130, 246, 0.1);
+            color: var(--text-secondary);
+        }
+
+        tr:hover {
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        /* Badges */
+        .badge {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin: 0.2rem;
+        }
+
+        .badge-success {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+        }
+
+        .badge-primary {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: white;
+        }
+
+        .badge-warning {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: white;
+        }
+
+        /* Diagrams */
+        .diagram {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            font-family: monospace;
+            white-space: pre;
+            overflow-x: auto;
+            color: #4ade80;
+            line-height: 1.4;
+        }
+
+        /* Info Boxes */
+        .info-box {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(99, 102, 241, 0.1));
+            border-left: 4px solid var(--accent-blue);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(217, 119, 6, 0.1));
+            border-left: 4px solid var(--warning);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        /* Scroll to Top Button */
+        .scroll-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #3b82f6, #6366f1);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            opacity: 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+            z-index: 1000;
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+        }
+
+        .scroll-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.6);
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(15, 23, 42, 0.95);
+            border-top: 2px solid var(--border-color);
+            padding: 3rem 0;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-blue);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.8rem;
+            }
+
+            section {
+                padding: 2rem;
+            }
+
+            nav {
+                top: 120px;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            table {
+                font-size: 0.9rem;
+            }
+
+            .diagram {
+                font-size: 0.8rem;
+                padding: 1rem;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background: white;
+                color: black;
+            }
+
+            header, nav, .scroll-top, footer {
+                display: none;
+            }
+
+            section {
+                page-break-inside: avoid;
+                box-shadow: none;
+                border: 1px solid #ccc;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>📘 Social Media Web Application</h1>
+            <p class="subtitle">Complete Technical Documentation</p>
+        </div>
+    </header>
+
+    <nav>
+        <div class="nav-content">
+            <ul class="nav-links">
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#architecture">Architecture</a></li>
+                <li><a href="#tech-stack">Tech Stack</a></li>
+                <li><a href="#database">Database</a></li>
+                <li><a href="#backend">Backend</a></li>
+                <li><a href="#frontend">Frontend</a></li>
+                <li><a href="#api">API Docs</a></li>
+                <li><a href="#realtime">Real-time</a></li>
+                <li><a href="#auth">Authentication</a></li>
+                <li><a href="#security">Security</a></li>
+                <li><a href="#deployment">Deployment</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Project Overview -->
+        <section id="overview">
+            <h2>🎯 Project Overview</h2>
+            <p>A full-stack social media platform built using the MERN stack (MongoDB, Express.js, React.js, Node.js) that allows users to create profiles, share posts, interact with other users, and communicate in real-time.</p>
+            
+            <h3>Key Features</h3>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🔐</div>
+                    <h4>Authentication</h4>
+                    <p>Email/Password & Google OAuth with OTP verification</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📝</div>
+                    <h4>Posts</h4>
+                    <p>Create, edit, delete posts with images and captions</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">❤️</div>
+                    <h4>Interactions</h4>
+                    <p>Like, comment, and share posts with friends</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👥</div>
+                    <h4>Social</h4>
+                    <p>Follow/unfollow users and see their posts</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💬</div>
+                    <h4>Real-time Chat</h4>
+                    <p>Instant messaging with typing indicators</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📞</div>
+                    <h4>Calls</h4>
+                    <p>Audio and video call support</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌐</div>
+                    <h4>Online Status</h4>
+                    <p>See who's online in real-time</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h4>Responsive</h4>
+                    <p>Works on all devices and screen sizes</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- System Architecture -->
+        <section id="architecture">
+            <h2>🏗️ System Architecture</h2>
+            
+            <h3>High-Level Architecture</h3>
+            <div class="diagram">┌─────────────────────────────────────────────────────────────┐
+│                         CLIENT SIDE                          │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐     │
+│  │   React UI   │  │    Redux     │  │  Socket.IO   │     │
+│  │  Components  │←→│  State Mgmt  │←→│    Client    │     │
+│  └──────────────┘  └──────────────┘  └──────────────┘     │
+│         ↓                  ↓                   ↓            │
+└─────────┼──────────────────┼───────────────────┼────────────┘
+          │                  │                   │
+          │ HTTP/HTTPS       │ HTTP/HTTPS        │ WebSocket
+          │                  │                   │
+┌─────────┼──────────────────┼───────────────────┼────────────┐
+│         ↓                  ↓                   ↓            │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐     │
+│  │   REST API   │  │  Express.js  │  │  Socket.IO   │     │
+│  │   Routes     │←→│  Middleware  │←→│    Server    │     │
+│  └──────────────┘  └──────────────┘  └──────────────┘     │
+│         ↓                  ↓                   ↓            │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐     │
+│  │ Controllers  │  │     JWT      │  │   Passport   │     │
+│  │   & Logic    │  │     Auth     │  │  (OAuth 2.0) │     │
+│  └──────────────┘  └──────────────┘  └──────────────┘     │
+│         ↓                                                   │
+│  ┌──────────────────────────────────────────────────┐      │
+│  │            MongoDB Database Layer                 │      │
+│  │  ┌──────┐ ┌──────┐ ┌──────┐ ┌──────┐ ┌──────┐  │      │
+│  │  │Users │ │Posts │ │Chats │ │Msgs  │ │OTP   │  │      │
+│  │  └──────┘ └──────┘ └──────┘ └──────┘ └──────┘  │      │
+│  └──────────────────────────────────────────────────┘      │
+│                      SERVER SIDE                            │
+└─────────────────────────────────────────────────────────────┘</div>
+
+            <h3>Request Flow</h3>
+            <div class="diagram">User Action (Frontend)
+      ↓
+React Component
+      ↓
+Redux Action/Axios Request
+      ↓
+API Endpoint (Express Route)
+      ↓
+Authentication Middleware (JWT)
+      ↓
+Controller Function
+      ↓
+Database Query (MongoDB)
+      ↓
+Response to Client
+      ↓
+Redux State Update
+      ↓
+UI Re-render</div>
+        </section>
+
+        <!-- Technology Stack -->
+        <section id="tech-stack">
+            <h2>💻 Technology Stack</h2>
+            
+            <h3>Frontend Technologies</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Technology</th>
+                        <th>Version</th>
+                        <th>Purpose</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>React.js</strong></td>
+                        <td>18.2.0</td>
+                        <td>UI Library</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Redux</strong></td>
+                        <td>4.2.0</td>
+                        <td>State Management</td>
+                    </tr>
+                    <tr>
+                        <td><strong>React Router</strong></td>
+                        <td>6.x</td>
+                        <td>Client-side Routing</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Axios</strong></td>
+                        <td>1.x</td>
+                        <td>HTTP Client</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Socket.IO Client</strong></td>
+                        <td>4.8.1</td>
+                        <td>Real-time Communication</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Material-UI</strong></td>
+                        <td>5.x</td>
+                        <td>UI Components</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Mantine Core</strong></td>
+                        <td>8.3.2</td>
+                        <td>Modern UI Components</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Backend Technologies</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Technology</th>
+                        <th>Version</th>
+                        <th>Purpose</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Node.js</strong></td>
+                        <td>18.x</td>
+                        <td>Runtime Environment</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Express.js</strong></td>
+                        <td>4.x</td>
+                        <td>Web Framework</td>
+                    </tr>
+                    <tr>
+                        <td><strong>MongoDB</strong></td>
+                        <td>6.x</td>
+                        <td>NoSQL Database</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Mongoose</strong></td>
+                        <td>7.x</td>
+                        <td>MongoDB ODM</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Socket.IO</strong></td>
+                        <td>4.8.1</td>
+                        <td>WebSocket Server</td>
+                    </tr>
+                    <tr>
+                        <td><strong>JWT</strong></td>
+                        <td>9.x</td>
+                        <td>Authentication</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Bcrypt</strong></td>
+                        <td>5.x</td>
+                        <td>Password Hashing</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Passport.js</strong></td>
+                        <td>0.6.x</td>
+                        <td>OAuth Authentication</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Nodemailer</strong></td>
+                        <td>7.0.6</td>
+                        <td>Email Service</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Multer</strong></td>
+                        <td>1.4.x</td>
+                        <td>File Upload Middleware</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Database Models -->
+        <section id="database">
+            <h2>🗄️ Database Models & Relationships</h2>
+            
+            <h3>1. User Model</h3>
+            <pre><code>{
+  email: String (required, unique),
+  password: String (required, hashed),
+  firstname: String (required),
+  lastname: String (required),
+  isAdmin: Boolean (default: false),
+  profilePicture: String (image URL),
+  coverPicture: String (image URL),
+  about: String,
+  livesin: String,
+  worksAt: String,
+  country: String,
+  relationship: String,
+  followers: [String] (Array of User IDs),
+  following: [String] (Array of User IDs),
+  googleId: String (unique, sparse),
+  isGoogleUser: Boolean (default: false),
+  online: Boolean (online status),
+  timestamps: true (createdAt, updatedAt)
+}</code></pre>
+
+            <h3>2. Post Model</h3>
+            <pre><code>{
+  userId: String (required, references User),
+  desc: String (post description/caption),
+  likes: [String] (Array of User IDs who liked),
+  image: String (image filename),
+  comments: [
+    {
+      userId: String (references User),
+      text: String (comment content),
+      createdAt: Date (default: Date.now)
+    }
+  ],
+  timestamps: true (createdAt, updatedAt)
+}</code></pre>
+
+            <h3>3. InstaChat Model</h3>
+            <pre><code>{
+  members: [String] (Array of User IDs, required),
+  isGroup: Boolean (default: false),
+  groupName: String (for group chats),
+  groupAvatar: String (group image),
+  lastMessage: String,
+  updatedAt: Date (default: Date.now),
+  blockedUsers: [String] (Array of blocked User IDs)
+}</code></pre>
+
+            <h3>4. InstaMessage Model</h3>
+            <pre><code>{
+  chatId: String (references InstaChat, required),
+  sender: String (User ID, required),
+  text: String (message content),
+  image: String (image filename),
+  status: String (enum: ['sent', 'delivered', 'read']),
+  createdAt: Date (default: Date.now)
+}</code></pre>
+
+            <h3>Entity-Relationship Diagram</h3>
+            <div class="diagram">┌──────────────┐         ┌──────────────┐
+│    USER      │         │     POST     │
+│──────────────│         │──────────────│
+│ _id          │1──────*│ userId       │
+│ email        │         │ desc         │
+│ password     │         │ likes[]      │
+│ firstname    │         │ image        │
+│ lastname     │         │ comments[]   │
+│ followers[]  │         └──────────────┘
+│ following[]  │
+│ profilePic   │         ┌──────────────┐
+│ coverPic     │         │  INSTACHAT   │
+│ online       │         │──────────────│
+└──────────────┘         │ _id          │
+       │                 │ members[]    │*──────*│
+       │                 │ isGroup      │         │
+       │                 │ groupName    │         │
+       │                 │ lastMessage  │         │
+       │                 │ blockedUsers│         │
+       │                 └──────────────┘         │
+       │                        │1                │
+       │                        │                 │
+       │                       *│                 │
+       │                 ┌──────────────┐         │
+       └─────────────────│ INSTAMESSAGE │─────────┘
+                         │──────────────│
+                         │ _id          │
+                         │ chatId       │
+                         │ sender       │
+                         │ text         │
+                         │ image        │
+                         │ status       │
+                         │ createdAt    │
+                         └──────────────┘</div>
+        </section>
+
+        <!-- Backend Architecture -->
+        <section id="backend">
+            <h2>🔧 Backend Architecture</h2>
+            
+            <h3>Directory Structure</h3>
+            <pre><code>Server/
+├── config/
+│   └── passport.js          # Passport OAuth configuration
+├── Controllers/
+│   ├── AuthController.js    # Authentication logic
+│   ├── UserController.js    # User management logic
+│   └── PostController.js    # Post management logic
+├── Middleware/
+│   └── authMiddleWare.js    # JWT verification middleware
+├── Models/
+│   ├── userModel.js         # User schema
+│   ├── postModel.js         # Post schema
+│   ├── InstaChat.js         # Chat schema
+│   └── InstaMessage.js      # Message schema
+├── Routes/
+│   ├── AuthRoute.js         # Authentication endpoints
+│   ├── UserRoute.js         # User endpoints
+│   ├── PostRoute.js         # Post endpoints
+│   ├── UploadRoute.js       # File upload endpoints
+│   ├── InstaChatRoute.js    # Chat endpoints
+│   └── GoogleAuthRoute.js   # OAuth endpoints
+├── public/                  # Static files
+│   └── images/              # Uploaded images
+├── .env                     # Environment variables
+├── index.js                 # Entry point
+├── socketServer.js          # Main server with Socket.IO
+└── package.json             # Dependencies</code></pre>
+
+            <h3>Key Controllers</h3>
+            
+            <h4>Authentication Controller</h4>
+            <div class="info-box">
+                <strong>Functions:</strong>
+                <ul>
+                    <li><code>sendOtp</code> - Sends OTP to Gmail for verification</li>
+                    <li><code>verifyOtp</code> - Verifies the OTP code</li>
+                    <li><code>registerUser</code> - Creates new user account</li>
+                    <li><code>loginUser</code> - Authenticates user and returns JWT</li>
+                </ul>
+            </div>
+
+            <h4>User Controller</h4>
+            <div class="info-box">
+                <strong>Functions:</strong>
+                <ul>
+                    <li><code>getUser</code> - Retrieve user by ID</li>
+                    <li><code>getAllUsers</code> - Get all users (for suggestions)</li>
+                    <li><code>updateUser</code> - Update user profile</li>
+                    <li><code>deleteUser</code> - Delete user account</li>
+                    <li><code>followUser</code> - Follow another user</li>
+                    <li><code>unFollowUser</code> - Unfollow a user</li>
+                </ul>
+            </div>
+
+            <h4>Post Controller</h4>
+            <div class="info-box">
+                <strong>Functions:</strong>
+                <ul>
+                    <li><code>createPost</code> - Create a new post</li>
+                    <li><code>getPost</code> - Get single post by ID</li>
+                    <li><code>updatePost</code> - Update post content</li>
+                    <li><code>deletePost</code> - Delete a post</li>
+                    <li><code>likePost</code> - Like/unlike a post</li>
+                    <li><code>getTimelinePosts</code> - Get posts from followed users</li>
+                    <li><code>addComment</code> - Add comment to post</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Frontend Architecture -->
+        <section id="frontend">
+            <h2>🎨 Frontend Architecture</h2>
+            
+            <h3>Directory Structure</h3>
+            <pre><code>client/src/
+├── actions/              # Redux actions
+│   ├── AuthAction.js
+│   ├── PostAction.js
+│   ├── UploadAction.js
+│   └── UserAction.js
+├── api/                  # API calls
+│   ├── AuthRequest.js
+│   ├── PostRequest.js
+│   ├── UploadRequest.js
+│   └── UserRequest.js
+├── Components/           # React components
+│   ├── Auth/
+│   ├── Chat/
+│   ├── Post/
+│   ├── Posts/
+│   ├── PostShare/
+│   ├── ProfileCard/
+│   └── ...
+├── Pages/               # Page components
+│   ├── auth/
+│   ├── home/
+│   └── profile/
+├── reducers/            # Redux reducers
+│   ├── authReducer.js
+│   ├── postReducer.js
+│   └── index.js
+├── store/               # Redux store
+│   └── ReduxStore.js
+├── utils/               # Utility functions
+│   └── avatarHelper.js
+├── App.js               # Main component
+└── index.js             # Entry point</code></pre>
+
+            <h3>Component Hierarchy</h3>
+            <div class="diagram">App
+├── Routes
+│   ├── Auth Page
+│   │   └── Login/Register Forms
+│   ├── Home Page
+│   │   ├── ProfileSide
+│   │   │   ├── ProfileCard
+│   │   │   ├── FollowersCard
+│   │   │   └── LogoSearch
+│   │   ├── PostSide
+│   │   │   ├── PostShare
+│   │   │   └── Posts
+│   │   │       └── Post (repeated)
+│   │   └── RightSide
+│   │       ├── TrendCard
+│   │       └── UserFollow
+│   ├── Profile Page
+│   │   ├── ProfileLeft
+│   │   └── PostSide
+│   └── Chat Page
+│       ├── ChatSelect
+│       └── Chat
+│           ├── ChatHeader
+│           ├── ChatMessages
+│           └── ChatInput
+└── Modals
+    ├── ProfileModal
+    └── ShareModal</div>
+        </section>
+
+        <!-- API Documentation -->
+        <section id="api">
+            <h2>🔌 API Documentation</h2>
+            
+            <div class="info-box">
+                <strong>Base URL:</strong><br>
+                Development: <code>http://localhost:4000</code><br>
+                Production: <code>https://your-domain.com</code>
+            </div>
+
+            <h3>Authentication Endpoints</h3>
+            
+            <h4>1. Send OTP</h4>
+            <pre><code>POST /auth/send-otp
+Content-Type: application/json
+
+Request Body:
+{
+  "email": "user@gmail.com"
+}
+
+Response:
+{
+  "message": "OTP sent to email."
+}</code></pre>
+
+            <h4>2. Verify OTP</h4>
+            <pre><code>POST /auth/verify-otp
+Content-Type: application/json
+
+Request Body:
+{
+  "email": "user@gmail.com",
+  "otp": "123456"
+}
+
+Response:
+{
+  "message": "OTP verified."
+}</code></pre>
+
+            <h4>3. Register User</h4>
+            <pre><code>POST /auth/register
+Content-Type: application/json
+
+Request Body:
+{
+  "email": "user@gmail.com",
+  "password": "securePassword123",
+  "firstname": "John",
+  "lastname": "Doe"
+}
+
+Response:
+{
+  "user": {...},
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+}</code></pre>
+
+            <h4>4. Login</h4>
+            <pre><code>POST /auth/login
+Content-Type: application/json
+
+Request Body:
+{
+  "email": "user@gmail.com",
+  "password": "securePassword123"
+}
+
+Response:
+{
+  "user": {...},
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+}</code></pre>
+
+            <h3>User Endpoints</h3>
+
+            <h4>Get User</h4>
+            <pre><code>GET /user/:id
+Authorization: Bearer &lt;token&gt;
+
+Response:
+{
+  "_id": "64abc123...",
+  "email": "user@gmail.com",
+  "firstname": "John",
+  "lastname": "Doe",
+  "profilePicture": "profile.jpg",
+  "followers": ["64def456..."],
+  "following": ["64ghi789..."]
+}</code></pre>
+
+            <h4>Follow User</h4>
+            <pre><code>PUT /user/:id/follow
+Authorization: Bearer &lt;token&gt;
+Content-Type: application/json
+
+Request Body:
+{
+  "userId": "64abc123..."
+}
+
+Response:
+{
+  "message": "User followed!"
+}</code></pre>
+
+            <h3>Post Endpoints</h3>
+
+            <h4>Create Post</h4>
+            <pre><code>POST /post
+Authorization: Bearer &lt;token&gt;
+Content-Type: application/json
+
+Request Body:
+{
+  "userId": "64abc123...",
+  "desc": "This is my post!",
+  "image": "post-image.jpg"
+}
+
+Response:
+{
+  "_id": "64xyz789...",
+  "userId": "64abc123...",
+  "desc": "This is my post!",
+  "likes": [],
+  "comments": []
+}</code></pre>
+
+            <h4>Like/Unlike Post</h4>
+            <pre><code>PUT /post/:id/like
+Authorization: Bearer &lt;token&gt;
+Content-Type: application/json
+
+Request Body:
+{
+  "userId": "64abc123..."
+}
+
+Response:
+{
+  "message": "Post liked/unliked"
+}</code></pre>
+
+            <h3>Chat Endpoints</h3>
+
+            <h4>Send Message</h4>
+            <pre><code>POST /instachat/message
+Authorization: Bearer &lt;token&gt;
+Content-Type: application/json
+
+Request Body:
+{
+  "chatId": "64chat789...",
+  "sender": "64abc123...",
+  "text": "Hello there!"
+}
+
+Response:
+{
+  "_id": "64msg123...",
+  "chatId": "64chat789...",
+  "sender": "64abc123...",
+  "text": "Hello there!",
+  "status": "sent"
+}</code></pre>
+        </section>
+
+        <!-- Real-time Features -->
+        <section id="realtime">
+            <h2>⚡ Real-time Features (Socket.IO)</h2>
+            
+            <h3>Socket Events</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Event</th>
+                        <th>Direction</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>user_online</code></td>
+                        <td>Client → Server</td>
+                        <td>Mark user as online</td>
+                    </tr>
+                    <tr>
+                        <td><code>user_offline</code></td>
+                        <td>Client → Server</td>
+                        <td>Mark user as offline</td>
+                    </tr>
+                    <tr>
+                        <td><code>user_status</code></td>
+                        <td>Server → Client</td>
+                        <td>Broadcast user status</td>
+                    </tr>
+                    <tr>
+                        <td><code>join_room</code></td>
+                        <td>Client → Server</td>
+                        <td>Join chat room</td>
+                    </tr>
+                    <tr>
+                        <td><code>send_message</code></td>
+                        <td>Client → Server</td>
+                        <td>Send message</td>
+                    </tr>
+                    <tr>
+                        <td><code>receive_message</code></td>
+                        <td>Server → Client</td>
+                        <td>Receive message</td>
+                    </tr>
+                    <tr>
+                        <td><code>typing</code></td>
+                        <td>Client → Server</td>
+                        <td>User typing</td>
+                    </tr>
+                    <tr>
+                        <td><code>stop_typing</code></td>
+                        <td>Client → Server</td>
+                        <td>User stopped typing</td>
+                    </tr>
+                    <tr>
+                        <td><code>call_request</code></td>
+                        <td>Client → Server</td>
+                        <td>Initiate audio/video call</td>
+                    </tr>
+                    <tr>
+                        <td><code>call_end</code></td>
+                        <td>Client → Server</td>
+                        <td>End the call</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Message Flow</h3>
+            <div class="diagram">User A                    Server                    User B
+  │                         │                         │
+  ├─send_message──────────>│                         │
+  │                         │                         │
+  │                         ├─Save to MongoDB        │
+  │                         │                         │
+  │                         ├─receive_message───────>│
+  │<─message_status─────────┤                         │
+  │ (delivered)             │                         │
+  │                         │<────message_read────────┤
+  │<─message_status─────────┤                         │
+  │ (read)                  │                         │</div>
+
+            <h3>Connection Setup</h3>
+            <pre><code>// Client Side
+import { io } from 'socket.io-client';
+
+const socket = io('http://localhost:4000', {
+  transports: ['websocket'],
+  reconnection: true
+});
+
+socket.emit('user_online', userId);
+
+// Server Side
+io.on('connection', (socket) => {
+  socket.on('send_message', (data) => {
+    // Save message to database
+    io.to(data.roomId).emit('receive_message', data);
+  });
+});</code></pre>
+        </section>
+
+        <!-- Authentication -->
+        <section id="auth">
+            <h2>🔐 Authentication & Authorization</h2>
+            
+            <h3>Authentication Methods</h3>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>Email/Password</h4>
+                    <p>Traditional authentication with OTP verification</p>
+                    <span class="badge badge-primary">JWT Token</span>
+                    <span class="badge badge-success">Bcrypt Hash</span>
+                </div>
+                <div class="feature-card">
+                    <h4>Google OAuth 2.0</h4>
+                    <p>Sign in with Google account</p>
+                    <span class="badge badge-primary">OAuth 2.0</span>
+                    <span class="badge badge-success">Passport.js</span>
+                </div>
+            </div>
+
+            <h3>JWT Token Structure</h3>
+            <pre><code>{
+  username: "user@gmail.com",
+  id: "64abc123...",
+  iat: 1234567890,    // Issued at
+  exp: 1234571490     // Expires in 1 hour
+}</code></pre>
+
+            <h3>Authentication Flow</h3>
+            <div class="diagram">Registration:
+┌─────────────┐
+│ Enter Email │
+└──────┬──────┘
+       ↓
+┌──────────────┐
+│  Send OTP    │
+└──────┬───────┘
+       ↓
+┌──────────────┐
+│  Verify OTP  │
+└──────┬───────┘
+       ↓
+┌─────────────────┐
+│ Complete Profile│
+└──────┬──────────┘
+       ↓
+┌─────────────────┐
+│ Hash Password   │
+└──────┬──────────┘
+       ↓
+┌─────────────────┐
+│ Generate JWT    │
+└──────┬──────────┘
+       ↓
+┌─────────────────┐
+│ Return Token    │
+└─────────────────┘</div>
+
+            <h3>Protected Routes</h3>
+            <pre><code>// Middleware
+const authMiddleware = async (req, res, next) => {
+  const token = req.headers.authorization?.split(" ")[1];
+  
+  if (!token) {
+    return res.status(401).json({ message: "No token" });
+  }
+  
+  const decoded = jwt.verify(token, process.env.JWT_KEY);
+  req.userId = decoded.id;
+  next();
+};
+
+// Usage
+router.get('/user/:id', authMiddleware, getUser);</code></pre>
+        </section>
+
+        <!-- Security -->
+        <section id="security">
+            <h2>🛡️ Security Features</h2>
+            
+            <h3>Security Layers</h3>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h4>Password Security</h4>
+                    <p>Bcrypt hashing with 10 salt rounds</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎫</div>
+                    <h4>JWT Tokens</h4>
+                    <p>Token-based authentication with 1h expiry</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📧</div>
+                    <h4>Email Verification</h4>
+                    <p>OTP-based email verification</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔍</div>
+                    <h4>Input Validation</h4>
+                    <p>Server-side validation for all inputs</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌐</div>
+                    <h4>CORS Protection</h4>
+                    <p>Configured CORS for allowed origins</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📁</div>
+                    <h4>File Upload Security</h4>
+                    <p>Type checking and size limits</p>
+                </div>
+            </div>
+
+            <h3>Environment Variables</h3>
+            <div class="warning-box">
+                <strong>⚠️ Important:</strong> Never commit .env file to version control!
+            </div>
+            <pre><code># Server/.env
+MONGO_DB=mongodb://localhost:27017/social-media
+PORT=4000
+JWT_KEY=your_secret_key_here
+GMAIL_USER=your_email@gmail.com
+GMAIL_PASS=your_app_password
+GOOGLE_CLIENT_ID=your_google_client_id
+GOOGLE_CLIENT_SECRET=your_google_client_secret</code></pre>
+        </section>
+
+        <!-- Deployment -->
+        <section id="deployment">
+            <h2>🚀 Deployment Guide</h2>
+            
+            <h3>Prerequisites</h3>
+            <ul>
+                <li>Node.js 18+</li>
+                <li>MongoDB 6+</li>
+                <li>Git</li>
+                <li>Domain name (optional)</li>
+            </ul>
+
+            <h3>Installation Steps</h3>
+            <pre><code># 1. Clone Repository
+git clone https://github.com/yourusername/social-media-app.git
+cd social-media-app
+
+# 2. Install Backend Dependencies
+cd Server
+npm install
+
+# 3. Install Frontend Dependencies
+cd ../client
+npm install
+
+# 4. Configure Environment
+# Create Server/.env and add your variables
+
+# 5. Start Development
+# Terminal 1: Backend
+cd Server
+npm start
+
+# Terminal 2: Frontend
+cd client
+npm start</code></pre>
+
+            <h3>Production Build</h3>
+            <pre><code># Build Frontend
+cd client
+npm run build
+
+# The build folder is ready for deployment</code></pre>
+
+            <h3>Deployment Platforms</h3>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>Heroku</h4>
+                    <p>Easy deployment for full-stack apps</p>
+                    <span class="badge badge-primary">Backend</span>
+                </div>
+                <div class="feature-card">
+                    <h4>Vercel</h4>
+                    <p>Perfect for React frontend</p>
+                    <span class="badge badge-success">Frontend</span>
+                </div>
+                <div class="feature-card">
+                    <h4>Railway</h4>
+                    <p>Modern deployment platform</p>
+                    <span class="badge badge-primary">Full-stack</span>
+                </div>
+                <div class="feature-card">
+                    <h4>MongoDB Atlas</h4>
+                    <p>Cloud MongoDB hosting</p>
+                    <span class="badge badge-warning">Database</span>
+                </div>
+            </div>
+
+            <h3>Performance Optimization</h3>
+            <ul>
+                <li>Enable gzip compression</li>
+                <li>Implement caching (Redis)</li>
+                <li>Use CDN for static assets</li>
+                <li>Database indexing</li>
+                <li>Lazy loading images</li>
+                <li>Code splitting</li>
+                <li>Minification and bundling</li>
+            </ul>
+        </section>
+
+        <!-- Future Enhancements -->
+        <section>
+            <h2>🎯 Future Enhancements</h2>
+            
+            <h3>Planned Features</h3>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📖</div>
+                    <h4>Stories</h4>
+                    <p>24-hour temporary posts</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎥</div>
+                    <h4>Reels</h4>
+                    <p>Short-form video content</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔍</div>
+                    <h4>Advanced Search</h4>
+                    <p>Hashtags and full-text search</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔔</div>
+                    <h4>Notifications</h4>
+                    <p>Real-time notification system</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌙</div>
+                    <h4>Dark Mode</h4>
+                    <p>Theme customization</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h4>Mobile App</h4>
+                    <p>React Native application</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Conclusion -->
+        <section>
+            <h2>📝 Conclusion</h2>
+            <p>This social media application demonstrates a complete full-stack implementation using modern web technologies. The architecture follows best practices for:</p>
+            <ul>
+                <li><strong>Scalability:</strong> Modular structure allows easy feature additions</li>
+                <li><strong>Security:</strong> Multi-layered authentication and authorization</li>
+                <li><strong>Real-time:</strong> Socket.IO for instant communication</li>
+                <li><strong>User Experience:</strong> Responsive design and smooth interactions</li>
+                <li><strong>Maintainability:</strong> Clean code structure and documentation</li>
+            </ul>
+            <p>The application provides a solid foundation that can be extended with additional features and optimizations based on specific requirements.</p>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="https://github.com/amrishnitjsr/Social-Media-Web-App-Mern-Stack-">GitHub</a>
+                <a href="#overview">Documentation</a>
+                <a href="#api">API Reference</a>
+                <a href="#deployment">Deployment</a>
+            </div>
+            <p>&copy; 2025 Social Media Web Application. All rights reserved.</p>
+            <p style="color: var(--text-secondary); margin-top: 1rem;">
+                Built with ❤️ using MERN Stack
+            </p>
+        </div>
+    </footer>
+
+    <button class="scroll-top" onclick="scrollToTop()">↑</button>
+
+    <script>
+        // Scroll to Top Button
+        window.addEventListener('scroll', function() {
+            const scrollTop = document.querySelector('.scroll-top');
+            if (window.pageYOffset > 300) {
+                scrollTop.classList.add('visible');
+            } else {
+                scrollTop.classList.remove('visible');
+            }
+        });
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Highlight active section in navigation
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-links a');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.style.color = 'var(--text-secondary)';
+                link.style.background = 'transparent';
+                if (link.getAttribute('href').slice(1) === current) {
+                    link.style.color = 'var(--accent-blue)';
+                    link.style.background = 'rgba(59, 130, 246, 0.1)';
+                }
+            });
+        });
+
+        // Add animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(30px)';
+            section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>

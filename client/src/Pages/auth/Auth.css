@@ -1,0 +1,225 @@
+.Auth{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    gap: 4rem;
+    position: relative;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 2rem;
+}
+
+.Auth > div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.a-left {
+    gap: 2rem;
+    flex-direction: column;
+    color: white;
+    text-align: center;
+    animation: slideInLeft 0.8s ease-out;
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.a-left > img{
+    width: 5rem;
+    height: 5rem;
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3));
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.Webname > h1 {
+    color: white;
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.Webname > h5 {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.1rem;
+    font-weight: 400;
+    margin-top: 0.5rem;
+}
+
+.a-right {
+    background: white;
+    border-radius: 20px;
+    padding: 2.5rem;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    animation: slideInRight 0.8s ease-out;
+    min-width: 400px;
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.infoForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.infoForm > h2 {
+    color: #667eea;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+.infoInput{
+    border: 2px solid #e0e0e0;
+    outline: none;
+    background-color: #f8f9fa;
+    border-radius: 12px;
+    padding: 14px 18px;
+    flex: 1;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+}
+
+.infoInput:focus {
+    border-color: #667eea;
+    background-color: white;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    transform: translateY(-2px);
+}
+
+.infoInput::placeholder {
+    color: #999;
+}
+
+.infoForm > div{
+    display: flex;  
+    gap: 1rem;
+    width: 100%;
+}
+
+.infoButton{
+    width: 100%;
+    height: 3rem;
+    align-items: center;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    color: white;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+.infoButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+}
+
+.infoButton:active {
+    transform: translateY(0);
+}
+
+.infoButton:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.authForm{
+    background-color: white;
+    border-radius: 20px;
+    padding: 1rem;
+    width: 100%;
+}
+
+.authForm > div{
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.authForm span {
+    font-size: 0.9rem;
+    color: #666;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.authForm span:hover {
+    color: #667eea;
+    text-decoration: underline;
+}
+
+/* Error Messages */
+span[style*="color: red"] {
+    background: #ffe5e5;
+    padding: 8px 12px;
+    border-radius: 8px;
+    color: #d32f2f !important;
+    font-size: 0.85rem;
+    width: 100%;
+    text-align: center;
+}
+
+/* Success Messages */
+span[style*="color: green"] {
+    background: #e5ffe5;
+    padding: 8px 12px;
+    border-radius: 8px;
+    color: #2e7d32 !important;
+    font-size: 0.85rem;
+    width: 100%;
+    text-align: center;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .Auth {
+        flex-direction: column;
+        gap: 2rem;
+        padding: 1rem;
+    }
+    
+    .a-right {
+        min-width: 100%;
+        padding: 2rem;
+    }
+    
+    .Webname > h1 {
+        font-size: 2.5rem;
+    }
+}

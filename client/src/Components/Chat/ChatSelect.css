@@ -1,0 +1,390 @@
+/* ==========================================
+   CHAT SELECT - MODERN UI DESIGN
+   ========================================== */
+
+/* Main Container */
+.ChatSelectBox {
+  max-width: 500px;
+  margin: 2rem auto;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 24px;
+  box-shadow: 0 20px 60px rgba(102, 126, 234, 0.3);
+  padding: 0;
+  overflow: hidden;
+  animation: slideInUp 0.5s ease-out;
+}
+
+/* Header Section */
+.ChatSelectHeader {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.15) 100%);
+  -webkit-backdrop-filter: blur(15px);
+  backdrop-filter: blur(15px);
+  padding: 2.5rem 2rem;
+  text-align: center;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+  position: relative;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Back to Home Button */
+.BackToHomeBtn {
+  position: absolute;
+  top: 1.25rem;
+  left: 1.25rem;
+  background: linear-gradient(135deg, rgba(79, 195, 247, 0.3) 0%, rgba(41, 182, 246, 0.2) 100%);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 1.5px solid rgba(79, 195, 247, 0.5);
+  border-radius: 12px;
+  padding: 0.625rem 1rem;
+  color: #4fc3f7;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15), 0 2px 8px rgba(79, 195, 247, 0.15) inset;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.BackToHomeBtn:hover {
+  background: linear-gradient(135deg, rgba(79, 195, 247, 0.45) 0%, rgba(41, 182, 246, 0.35) 100%);
+  transform: translateX(-3px) scale(1.02);
+  box-shadow: 0 6px 25px rgba(41, 182, 246, 0.3), 0 2px 10px rgba(79, 195, 247, 0.2) inset;
+  border-color: rgba(79, 195, 247, 0.7);
+}
+
+.BackToHomeBtn:active {
+  transform: translateX(-1px);
+}
+
+.BackIcon {
+  font-size: 1.25rem;
+  transition: transform 0.3s ease;
+}
+
+.BackToHomeBtn:hover .BackIcon {
+  transform: translateX(-3px);
+}
+
+.ChatSelectTitle {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #4fc3f7 0%, #29b6f6 50%, #0288d1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 2px 8px rgba(79, 195, 247, 0.4)) drop-shadow(0 4px 15px rgba(41, 182, 246, 0.5));
+  animation: fadeIn 0.6s ease-out, titleGlow 2s ease-in-out infinite alternate;
+  letter-spacing: 0.5px;
+}
+
+.ChatSelectSubtitle {
+  margin: 0.75rem 0 0 0;
+  font-size: 1.05rem;
+  color: #4fc3f7;
+  font-weight: 500;
+  text-shadow: 0 2px 8px rgba(41, 182, 246, 0.4), 0 1px 3px rgba(79, 195, 247, 0.5);
+  opacity: 0.98;
+  letter-spacing: 0.3px;
+}
+
+/* User List Container */
+.ChatUserListContainer {
+  background: #ffffff;
+  padding: 1.5rem;
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.ChatUserList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.ChatUserList li {
+  margin-bottom: 0.75rem;
+  animation: fadeInUp 0.4s ease-out;
+  animation-fill-mode: both;
+}
+
+.ChatUserList li:nth-child(1) { animation-delay: 0.1s; }
+.ChatUserList li:nth-child(2) { animation-delay: 0.15s; }
+.ChatUserList li:nth-child(3) { animation-delay: 0.2s; }
+.ChatUserList li:nth-child(4) { animation-delay: 0.25s; }
+.ChatUserList li:nth-child(5) { animation-delay: 0.3s; }
+.ChatUserList li:nth-child(n+6) { animation-delay: 0.35s; }
+
+/* User Card Link */
+.ChatUserLink {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  background: linear-gradient(135deg, #f8f9ff 0%, #fafbff 100%);
+  border: 2px solid transparent;
+  border-radius: 16px;
+  padding: 1rem 1.25rem;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.ChatUserLink::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 0;
+}
+
+.ChatUserLink:hover::before {
+  opacity: 1;
+}
+
+.ChatUserLink:hover {
+  border-color: #667eea;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.25);
+}
+
+/* User Avatar */
+.ChatUserAvatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-right: 1rem;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+  border: 3px solid #ffffff;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+  transition: transform 0.3s ease;
+  overflow: hidden;
+}
+
+.ChatUserLink:hover .ChatUserAvatar {
+  transform: scale(1.1) rotate(5deg);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Profile Image inside Avatar */
+.ChatUserProfileImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+/* Initials inside Avatar */
+.ChatUserInitials {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+/* User Info */
+.ChatUserInfo {
+  flex: 1;
+  text-align: left;
+  position: relative;
+  z-index: 1;
+}
+
+.ChatUserName {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1c1e21;
+  margin: 0 0 0.25rem 0;
+  transition: color 0.3s ease;
+}
+
+.ChatUserLink:hover .ChatUserName {
+  color: #ffffff;
+}
+
+.ChatUserStatus {
+  font-size: 0.85rem;
+  color: #65676b;
+  margin: 0;
+  transition: color 0.3s ease;
+}
+
+.ChatUserLink:hover .ChatUserStatus {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Chat Icon */
+.ChatUserIcon {
+  font-size: 1.5rem;
+  color: #667eea;
+  position: relative;
+  z-index: 1;
+  transition: all 0.3s ease;
+}
+
+.ChatUserLink:hover .ChatUserIcon {
+  color: #ffffff;
+  transform: translateX(5px);
+}
+
+/* Empty State */
+.ChatEmptyState {
+  text-align: center;
+  padding: 3rem 2rem;
+  color: #65676b;
+}
+
+.ChatEmptyIcon {
+  font-size: 4rem;
+  color: #e4e6eb;
+  margin-bottom: 1rem;
+}
+
+.ChatEmptyText {
+  font-size: 1.1rem;
+  color: #65676b;
+  margin: 0;
+}
+
+/* Custom Scrollbar */
+.ChatUserListContainer::-webkit-scrollbar {
+  width: 6px;
+}
+
+.ChatUserListContainer::-webkit-scrollbar-track {
+  background: rgba(102, 126, 234, 0.05);
+  border-radius: 10px;
+}
+
+.ChatUserListContainer::-webkit-scrollbar-thumb {
+  background: rgba(102, 126, 234, 0.3);
+  border-radius: 10px;
+  transition: background 0.3s ease;
+}
+
+.ChatUserListContainer::-webkit-scrollbar-thumb:hover {
+  background: rgba(102, 126, 234, 0.5);
+}
+
+/* Animations */
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes titleGlow {
+  from {
+    filter: drop-shadow(0 2px 8px rgba(79, 195, 247, 0.4)) drop-shadow(0 4px 15px rgba(41, 182, 246, 0.5));
+  }
+  to {
+    filter: drop-shadow(0 2px 12px rgba(79, 195, 247, 0.6)) drop-shadow(0 4px 25px rgba(41, 182, 246, 0.7));
+  }
+}
+
+/* Responsive Design */
+@media screen and (max-width: 600px) {
+  .ChatSelectBox {
+    margin: 1rem;
+    border-radius: 20px;
+  }
+
+  .ChatSelectHeader {
+    padding: 1.5rem;
+    padding-top: 4rem;
+  }
+
+  .BackToHomeBtn {
+    top: 1rem;
+    left: 1rem;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.85rem;
+    font-weight: 700;
+  }
+
+  .BackIcon {
+    font-size: 1.1rem;
+  }
+
+  .ChatSelectTitle {
+    font-size: 1.65rem;
+    letter-spacing: 0.3px;
+  }
+
+  .ChatSelectSubtitle {
+    font-size: 0.95rem;
+    margin-top: 0.5rem;
+  }
+
+  .ChatUserListContainer {
+    padding: 1rem;
+  }
+
+  .ChatUserAvatar {
+    width: 44px;
+    height: 44px;
+    font-size: 1.25rem;
+  }
+
+  .ChatUserInitials {
+    font-size: 1.25rem;
+  }
+
+  .ChatUserName {
+    font-size: 1rem;
+  }
+
+  .ChatUserStatus {
+    font-size: 0.8rem;
+  }
+
+  .ChatUserLink {
+    padding: 0.875rem 1rem;
+  }
+}
